@@ -1,11 +1,11 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import './App.css';
-import Header from './components/header/header.component';
-import HomePage from './pages/homepage/homepage.component';
-import ShopPage from './components/shop/shop.component';
-import SignInAndSignUpPage from './components/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
+import Header from "./components/header/header.component";
+import HomePage from "./pages/homepage/homepage.component";
+import ShopPage from "./components/shop/shop.component";
+import SignInAndSignUpPage from "./components/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   state = {
@@ -22,12 +22,16 @@ class App extends React.Component {
 
         // get data on snapshot related to user stored in DB
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
+          this.setState(
+            {
+              id: snapShot.id,
+              ...snapShot.data()
+            },
+            () => {
+              console.log("this.state :", this.state);
+            }
+          );
         });
-        console.log('this.state :', this.state);
       }
 
       this.setState({ currentUser: userAuth });
