@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import "./sign-up.styles.scss";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+
+import "./sign-up.styles.scss";
 
 class SignUp extends Component {
   state = {
@@ -10,11 +13,6 @@ class SignUp extends Component {
     email: "",
     password: "",
     confirmPassword: ""
-  };
-
-  handleChange = e => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value });
   };
 
   handleSubmit = async event => {
@@ -46,13 +44,18 @@ class SignUp extends Component {
     }
   };
 
+  handleChange = e => {
+    const { value, name } = e.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
       <div className="sign-up">
         <h2 className="title">I do not have an account</h2>
         <span>Sign up with your email and password</span>
-        <form>
+        <form className="sign-up-form" onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
             name="displayName"
@@ -62,7 +65,7 @@ class SignUp extends Component {
             required
           />
           <FormInput
-            type="text"
+            type="email"
             name="email"
             value={email}
             onChange={this.handleChange}

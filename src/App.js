@@ -23,15 +23,17 @@ class App extends React.Component {
         // get data on snapshot related to user stored in DB
         userRef.onSnapshot(snapShot => {
           this.setState({
-            id: snapShot.id,
-            ...snapShot.data()
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
           });
 
           console.log("this.state :", this.state);
         });
+      } else {
+        this.setState({ currentUser: userAuth });
       }
-
-      this.setState({ currentUser: userAuth });
     });
   }
 
