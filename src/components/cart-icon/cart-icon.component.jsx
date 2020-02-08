@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  itemCount: selectCartItemsCount
+  itemCount: selectCartItemsCount(state) // now references selectCartItems in the selector file, which then references selectCart where all the state is passed, which then passes to the function within it
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
