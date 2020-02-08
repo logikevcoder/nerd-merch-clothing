@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as ShoppingIcon } from "../../assets/img/shopping-bag.svg";
 import { connect } from "react-redux";
+import { createStructuredSelector } from 'reselect';
 
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
@@ -20,8 +21,8 @@ const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
-const mapStateToProps = state => ({
-  itemCount: selectCartItemsCount(state) // now references selectCartItems in the selector file, which then references selectCart where all the state is passed, which then passes to the function within it
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount // now references selectCartItems in the selector file, which then references selectCart where all the state is passed, which then passes to the function within it
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

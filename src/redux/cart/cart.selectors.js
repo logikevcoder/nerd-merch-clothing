@@ -8,6 +8,11 @@ export const selectCartItems = createSelector(  // carItems => item on the cart 
   cart => cart.cartItems // function to return the value you want.. each output of the input selectors in the order it was written
 );
 
+export const selectCartHidden = createSelector(
+  [selectCart],
+  cart => cart.hidden
+)
+
 // more specific selector
 export const selectCartItemsCount = createSelector(
   [selectCartItems], 
