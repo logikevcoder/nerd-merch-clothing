@@ -15,3 +15,22 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  // set this const variable to be the cartItem where the id matches the item to add
+  const existingCartItem = cartItems.find( // if this is true return below
+    cartItem => cartItem.id === cartItemToRemove.id //get each individual item, if the id matches the item to add's id
+  );
+
+  // if the item exists above 
+  if (existingCartItem) {
+    return cartItems.map(cartItem => 
+      cartItem.id === cartItemToRemove.id
+        ? { ...cartItem, quantity: cartItem.quantity === 0 }
+        : cartItem
+    );
+  }
+
+  return [...cartItems, { ...cartItemToRemove, quantity: 0 }];
+};
+
